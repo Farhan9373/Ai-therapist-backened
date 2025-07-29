@@ -23,7 +23,7 @@ export const createChatSession = async (req: Request, res: Response) => {
         .json({ message: "Unauthorized - User not authenticated" });
     }
 
-    const userId = new Types.ObjectId(req.user.id);
+    const userId = new Types.ObjectId(req.user._id);
     const user = await User.findById(userId);
 
     if (!user) {
