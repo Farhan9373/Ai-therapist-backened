@@ -25,6 +25,7 @@ export const createChatSession = async (req: Request, res: Response) => {
 
     const userId = new Types.ObjectId(req.user.id);
     const user = await User.findById(userId);
+    console.log("Creating chat session for user:", userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -110,7 +111,7 @@ export const sendMessage = async (req: Request, res: Response) => {
     await inngest.send(event);
 
     // Process the message directly using Gemini
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Analyze the message
     const analysisPrompt = `Analyze this therapy message and provide insights. Return ONLY a valid JSON object with no markdown formatting or additional text.
